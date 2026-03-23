@@ -2,7 +2,7 @@
   "name": "codesight-for-java",
   "displayName": "CodeSight for Java",
   "description": "Deep Java code insight for AI agents: call chain extraction, go to definition, find references, document symbols, find implementations and hover info",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "yulongliu-dou",
   "license": "MIT",
   "repository": {
