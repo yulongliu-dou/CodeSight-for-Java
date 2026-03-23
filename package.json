@@ -4,6 +4,7 @@
   "description": "Deep Java code insight for AI agents: call chain extraction, go to definition, find references, document symbols, find implementations and hover info",
   "version": "1.0.0",
   "publisher": "yulongliu-dou",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/yulongliu-dou/CodeSight-for-Java.git"
