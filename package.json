@@ -1,0 +1,185 @@
+{
+  "name": "codesight-for-java",
+  "displayName": "CodeSight for Java",
+  "description": "Deep Java code insight for AI agents: call chain extraction, go to definition, find references, document symbols, find implementations and hover info",
+  "version": "1.0.0",
+  "publisher": "yulongliu-dou",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yulongliu-dou/CodeSight-for-Java.git"
+  },
+  "galleryBanner": {
+    "color": "#2d3748",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Other"
+  ],
+  "keywords": [
+    "java",
+    "ai",
+    "call chain",
+    "lsp",
+    "code insight",
+    "context",
+    "agent"
+  ],
+  "extensionDependencies": [
+    "redhat.java"
+  ],
+  "activationEvents": [
+    "onLanguage:java"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "javaExtractor.extractCallChain",
+        "title": "Java AI: Extract Call Chain for AI"
+      },
+      {
+        "command": "javaExtractor.extractCoreCallChain",
+        "title": "Java AI: Extract Core Call Chain (Compact)"
+      },
+      {
+        "command": "javaExtractor.goToDefinition",
+        "title": "Java AI: Go to Definition"
+      },
+      {
+        "command": "javaExtractor.findReferences",
+        "title": "Java AI: Find All References"
+      },
+      {
+        "command": "javaExtractor.showSymbols",
+        "title": "Java AI: Show File Symbols"
+      },
+      {
+        "command": "javaExtractor.findImplementations",
+        "title": "Java AI: Find Implementations"
+      },
+      {
+        "command": "javaExtractor.showHover",
+        "title": "Java AI: Show Hover Info"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "javaExtractor.extractCallChain",
+          "when": "editorLangId == java",
+          "group": "z_javaExtractor@1"
+        },
+        {
+          "command": "javaExtractor.extractCoreCallChain",
+          "when": "editorLangId == java",
+          "group": "z_javaExtractor@2"
+        },
+        {
+          "command": "javaExtractor.goToDefinition",
+          "when": "editorLangId == java",
+          "group": "z_javaExtractor@3"
+        },
+        {
+          "command": "javaExtractor.findReferences",
+          "when": "editorLangId == java",
+          "group": "z_javaExtractor@4"
+        },
+        {
+          "command": "javaExtractor.showSymbols",
+          "when": "editorLangId == java",
+          "group": "z_javaExtractor@5"
+        },
+        {
+          "command": "javaExtractor.findImplementations",
+          "when": "editorLangId == java",
+          "group": "z_javaExtractor@6"
+        },
+        {
+          "command": "javaExtractor.showHover",
+          "when": "editorLangId == java",
+          "group": "z_javaExtractor@7"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "CodeSight for Java",
+      "properties": {
+        "javaExtractor.maxDepth": {
+          "type": "number",
+          "default": 10,
+          "description": "Maximum recursion depth for call chain extraction"
+        },
+        "javaExtractor.outputDir": {
+          "type": "string",
+          "default": ".skill_context",
+          "description": "Output directory for extracted context files"
+        },
+        "javaExtractor.removeJavadoc": {
+          "type": "boolean",
+          "default": true,
+          "description": "Remove Javadoc comments to reduce token count"
+        },
+        "javaExtractor.removeComments": {
+          "type": "boolean",
+          "default": true,
+          "description": "Remove inline comments from method bodies"
+        },
+        "javaExtractor.removeAnnotations": {
+          "type": "boolean",
+          "default": false,
+          "description": "Remove annotations like @Override, @Deprecated (keeps @Transactional etc.)"
+        },
+        "javaExtractor.compactImports": {
+          "type": "boolean",
+          "default": true,
+          "description": "Only keep imports that are used by extracted methods"
+        },
+        "javaExtractor.shortImplPaths": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show only class names instead of full paths for implementations"
+        },
+        "javaExtractor.indentSize": {
+          "type": "number",
+          "default": 2,
+          "description": "Indentation size (0 for no indent, 2 or 4)"
+        },
+        "javaExtractor.compactMode": {
+          "type": "boolean",
+          "default": false,
+          "description": "Ultra compact mode: signatures only for non-entry methods"
+        },
+        "javaExtractor.excludePatterns": {
+          "type": "array",
+          "default": ["**/test/**", "**/Test*.java", "**/*Test.java", "**/*Tests.java"],
+          "description": "File patterns to exclude from extraction"
+        },
+        "javaExtractor.excludeClassPatterns": {
+          "type": "array",
+          "default": ["Log", "Logger", "LogFactory", "ErrorContext", "Assert", "Preconditions"],
+          "description": "Class name patterns to exclude (logging, assertions, etc.)"
+        },
+        "javaExtractor.excludeMethodPatterns": {
+          "type": "array",
+          "default": ["toString", "hashCode", "equals", "log*", "debug*", "info*", "warn*", "error*", "trace*"],
+          "description": "Method name patterns to exclude"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.x",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.x"
+  }
+}
